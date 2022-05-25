@@ -13,7 +13,7 @@ function AvailableMeals() {
       setIsLoading(true);
 
       const response = await fetch(
-        "https://react-http-d74ee-default-rtdb.firebaseio.com/meals"
+        "https://react-http-d74ee-default-rtdb.firebaseio.com/meals.json"
       );
 
       if (!response.ok) {
@@ -51,14 +51,21 @@ function AvailableMeals() {
       />
     );
   });
-  return (
-    <section className={classes.meals}>
+  if (httpError) {
+    return (
       <Card>
-        {isLoading && <p className={classes.loadingMeals}>Loading...</p>}
-        {httpError && <p className={classes.loadingMeals}>{httpError}</p>}
-        <ul>{mealsList}</ul>
+        <p className={classes.loadingMeals}>{httpError}</p>
       </Card>
-    </section>
-  );
+    );
+  } else {
+    return (
+      <section className={classes.meals}>
+        <Card>
+          {isLoading && <p className={classes.loadingMeals}>Loading...</p>}
+          <ul>{mealsList}</ul>
+        </Card>
+      </section>
+    );
+  }
 }
 export default AvailableMeals;

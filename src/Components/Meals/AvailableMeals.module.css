@@ -26,3 +26,8 @@
 .loadingMeals {
   text-align: center;
 }
+
+.mealsError {
+  text-align: center;
+  color: red;
+}
